@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+    <style>
+        #container{
+            text-align: center;
+        }
+        table{
+            margin: auto;
+        }
+        #course{
+            width: 100%;
+        }
+        body {
+    margin: 0;
+    
+    background: linear-gradient(135deg, #b4f51d, #0e0d0d,#cf0404 , #2d048d);
+    background-size: 400% 400%;
+    animation: gradientBG 5s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <div id="container">
+        <h1>STUDENT FORM</h1>
+
+        <form id="studentForm">
+            <table border="2" style="text-align: center; padding: 5px; color: white;">
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <td><input type="text" id="name" required></td>
+                    </tr>
+                    <tr>
+                        <th>Age</th>
+                        <td><input type="number" id="age" required></td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td><label><input type="radio" value="male" name="gender">Male</label>
+                            <label><input type="radio" value="female" name="gender">Female</label></td>
+                    </tr>
+                    <tr>
+                        <th>Course</th>
+                        <td><select id="course" required >
+                            <option>JAVA</option>
+                            <option>HTML5</option>
+                            <option>CSS3</option>
+                            <option>JavaScript</option>
+                            <option>React.js</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td><input type="email" id="email" required></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><button type="submit" id="btn" style="background-color: yellowgreen; width: 100%; padding: 3px;">Save</button></th>
+                    </tr>
+    
+                </tbody>       
+            </table>
+        </form>
+
+    <br>
+
+    <table id="studentTable" border="2" style="color: aquamarine;">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+<script >
+    let form = document.getElementById("studentForm")
+    let table = document.getElementById("studentTable")
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault()
+
+    const name = document.getElementById("name").value
+    const age = document.getElementById("age").value
+    const gender = document.querySelector('input[name="gender"]:checked').value
+    const course = document.getElementById("course").value
+    const email = document.getElementById("email").value
+
+    const newRowData = table.insertRow()
+    newRowData.innerHTML = `
+    <td>${name}</td>
+    <td>${age}</td>
+    <td>${gender}</td>
+    <td>${course}</td>
+    <td>${email}</td>
+    <td><button onclick="deleteRow(this)" style="background-color: red; padding: 5px;">Delete</button></td>
+`;
+    form.reset()
+})  
+
+function deleteRow(button) {
+    const row = button.closest("tr")
+    row.remove()
+}
+
+</script>
+
+</body>
+
+</html>
